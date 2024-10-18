@@ -17,7 +17,7 @@ Welcome to the Django Blog Website repository! This project is a fully functiona
 1. Clone the repository to your local machine:
 
    ```
-   git clone https://github.com/ali-aj/Django-Blog-Website.git
+   git clone https://github.com/ali-aj/containerize-django-blog-website.git
    ```
 
 2. Create a virtual environment and activate it:
@@ -27,6 +27,12 @@ Welcome to the Django Blog Website repository! This project is a fully functiona
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
+3. Install Required dependencies:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
 4. Set up the database:
 
    ```
@@ -34,16 +40,10 @@ Welcome to the Django Blog Website repository! This project is a fully functiona
    python manage.py migrate
    ```
 
-5. Create a superuser account to access the admin panel:
+5. Create a superuser account to access the admin panel (Optional):
 
    ```
    python manage.py createsuperuser
-   ```
-
-6. Install Required dependencies:
-
-   ```
-   pip install -r requirements.txt
    ```
 
 6. Start the development server:
