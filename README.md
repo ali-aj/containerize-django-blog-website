@@ -33,6 +33,11 @@ Welcome to the Django Blog Website repository! This project is a fully functiona
    pip install -r requirements.txt
    ```
 
+4. Navigate to app directory:
+   ```
+   cd blogs/
+   ```
+
 4. Set up the database:
 
    ```
