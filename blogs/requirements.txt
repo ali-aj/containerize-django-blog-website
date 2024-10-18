@@ -1,8 +1,10 @@
 asgiref==3.8.1
 Django==5.1.2
+django-livereload-server==0.5.1
 dnspython==2.7.0
 email_validator==2.2.0
 idna==3.10
 pillow==11.0.0
 pyotp==2.9.0
 sqlparse==0.5.1
+tornado==6.4.1
