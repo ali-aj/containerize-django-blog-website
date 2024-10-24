@@ -18,3 +18,15 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8000
+        volumeMounts:
+        - name: sqlite-storage
+          mountPath: /app/db 
+        - name: media-volume
+          mountPath: /app/media/images  
+      volumes:
+      - name: sqlite-storage
+        persistentVolumeClaim:
+          claimName: django-sqlite-pvc
+      - name: media-volume
+        persistentVolumeClaim:
+          claimName: media-pvc
