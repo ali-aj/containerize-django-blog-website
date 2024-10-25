@@ -4,3 +4,6 @@ resources:
   - pvc.yaml
   - pvc-media.yaml
   - ingress.yaml
+  - rbac.yaml
+  - service-account.yaml
+  - network-policy.yaml

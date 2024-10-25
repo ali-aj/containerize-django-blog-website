@@ -12,6 +12,7 @@ spec:
       labels:
         app: django-app
     spec:
+      serviceAccountName: django-service-account
       containers:
       - name: django-app
         image: django-local

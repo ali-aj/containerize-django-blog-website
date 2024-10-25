@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: django-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: django-role-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: django-service-account
+  namespace: default
+roleRef:
+  kind: Role
+  name: django-role
+  apiGroup: rbac.authorization.k8s.io
