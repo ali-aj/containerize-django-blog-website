@@ -44,5 +44,5 @@ jobs:
       
             - name: Build and push backend container
               run: |
-                docker build -t ${{ secrets.DOCKER_USERNAME }}/django-app:latest -f Dockerfile .
+                docker build -t ${{ secrets.DOCKER_USERNAME }}/django-app:latest -f blogs/Dockerfile .
                 docker push ${{ secrets.DOCKER_USERNAME }}/django-app:latest
