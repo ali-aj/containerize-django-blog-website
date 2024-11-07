@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install dependencies in a separate layer
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt --verbose
 
 # Copy the project files
 COPY . .
