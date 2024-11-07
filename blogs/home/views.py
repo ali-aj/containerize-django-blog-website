@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import blogData, contactUs
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+
+from .models import blogData, contactUs
 
 
 # Create your views here.

@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
-from .forms import loginForm
+import re
+
+import pyotp
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-import re
+from django.shortcuts import redirect, render
 from email_validator import validate_email
-import pyotp
+
+from .forms import loginForm
 from .models import otpClass
 
 
@@ -86,8 +88,8 @@ def forget_password_view(request):
         if request.POST["password"] == "" and request.POST["otp"] == "":
             email = request.POST["email"]
             try:
-                user = User.objects.get(email=email)
-            except:
+                User.objects.get(email=email)
+            except BaseException:
                 email = ""
                 return render(
                     request,
