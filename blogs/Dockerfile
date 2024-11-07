@@ -8,15 +8,15 @@ ENV PYTHONUNBUFFERED=1
 # Set the working directory
 WORKDIR /app
 
-# Update pip and install build dependencies
+# Install build dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc python3-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --upgrade pip setuptools wheel
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies in a separate layer
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt 2>&1 | tee pip_install.log || (cat pip_install.log && exit 1)
+RUN pip install --upgrade pip setuptools wheel \
+    && pip install --no-cache-dir -r requirements.txt
 
 # Copy the project files
 COPY . .
