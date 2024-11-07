@@ -7,6 +7,7 @@ from email_validator import validate_email
 import pyotp
 from .models import otpClass
 
+
 # Create your views here.
 def redirect_view(request):
     if request.user.is_authenticated:
