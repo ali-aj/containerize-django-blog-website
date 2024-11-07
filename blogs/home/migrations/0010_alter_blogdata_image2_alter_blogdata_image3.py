@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('home', '0009_alter_blogdata_image1_alter_blogdata_image2_and_more'),
+        ("home", "0009_alter_blogdata_image1_alter_blogdata_image2_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blogdata',
-            name='image2',
-            field=models.ImageField(blank=True, upload_to='images/'),
+            model_name="blogdata",
+            name="image2",
+            field=models.ImageField(blank=True, upload_to="images/"),
         ),
         migrations.AlterField(
-            model_name='blogdata',
-            name='image3',
-            field=models.ImageField(blank=True, upload_to='images/'),
+            model_name="blogdata",
+            name="image3",
+            field=models.ImageField(blank=True, upload_to="images/"),
         ),
     ]
