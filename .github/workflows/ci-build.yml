@@ -95,7 +95,7 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
       
             - name: Build and push backend container
-              uses: docker/build-push-action@v2
+              uses: docker/build-push-action@v3
               with:
                 context: blogs/
                 file: blogs/Dockerfile
