@@ -113,6 +113,11 @@ jobs:
           with:
             python-version: '3.12'
 
+        - name: Install Test Dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install coverage xmlrunner
+
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
 
@@ -126,6 +131,12 @@ jobs:
           run: |
             docker build -t ${{ secrets.DOCKER_USERNAME }}/django-app:latest blogs/
 
-        - name: Run Unit Tests inside Docker Container
+        - name: Run Unit Tests and Generate Report
           run: |
-            docker run --rm ${{ secrets.DOCKER_USERNAME }}/django-app:latest sh -c "pip list && python manage.py test blogs/"
+            docker run --rm -v ${{ github.workspace }}/test-reports:/app/test-reports ${{ secrets.DOCKER_USERNAME }}/django-app:latest sh -c "python manage.py test blogs --testrunner=xmlrunner.extra.djangotestrunner.XMLTestRunner --output-file /app/test-reports/test_results.xml"
+
+        - name: Upload Test Results
+          uses: actions/upload-artifact@v3
+          with:
+            name: test-results
+            path: test-reports/
