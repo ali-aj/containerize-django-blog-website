@@ -18,7 +18,7 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12'
+            python-version: '3.11'
 
         - name: Install Linter
           run: |
@@ -42,7 +42,7 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12'
+            python-version: '3.11'
 
         - name: Install Code Formatter
           run: |
@@ -62,7 +62,7 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12'
+            python-version: '3.11'
 
         - name: Install Bandit
           run: |
@@ -83,7 +83,7 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
-                python-version: '3.12'
+                python-version: '3.11'
 
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v2
@@ -111,7 +111,11 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12'
+            python-version: '3.11'
+
+        - name: Install Test Dependencies
+          run: |
+            pip install coverage xmlrunner
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
@@ -126,6 +130,14 @@ jobs:
           run: |
             docker build -t ${{ secrets.DOCKER_USERNAME }}/django-app:latest blogs/
 
-        - name: Run Unit Tests inside Docker Container
+        - name: Run Unit Tests and Generate Report
           run: |
-            docker run --rm ${{ secrets.DOCKER_USERNAME }}/django-app:latest sh -c "pip list && python manage.py test blogs/"
+            docker run --rm -v ${{ github.workspace }}/test-reports:/app/test-reports \
+            ${{ secrets.DOCKER_USERNAME }}/django-app:latest sh -c \
+            "python manage.py test blogs --testrunner=xmlrunner.XMLTestRunner --output-dir /app/test-reports"
+
+        - name: Upload Test Results
+          uses: actions/upload-artifact@v3
+          with:
+            name: test-results
+            path: test-reports/

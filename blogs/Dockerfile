@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.12-slim as build
+FROM python:3.11-slim as build
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -22,7 +22,7 @@ RUN pip install --upgrade pip setuptools wheel \
 COPY . .
 
 # Final stage
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -32,7 +32,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Copy installed packages from the build stage
-COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=build /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=build /app /app/
 
 # Create a non-root user
