@@ -115,7 +115,7 @@ jobs:
 
         - name: Install Test Dependencies
           run: |
-            pip install coverage xmlrunner
+            pip install unittest2 coverage xmlrunner
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
