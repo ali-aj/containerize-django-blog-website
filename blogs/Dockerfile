@@ -32,7 +32,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Copy installed packages from the build stage
-COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=build /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=build /app /app/
 
 # Create a non-root user
