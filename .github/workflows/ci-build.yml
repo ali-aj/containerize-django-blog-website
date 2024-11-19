@@ -18,7 +18,7 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12'
+            python-version: '3.11'
 
         - name: Install Linter
           run: |
@@ -115,7 +115,7 @@ jobs:
 
         - name: Install Test Dependencies
           run: |
-            pip install unittest2 coverage xmlrunner
+            pip install coverage xmlrunner
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v2
