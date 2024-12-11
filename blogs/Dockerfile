@@ -44,4 +44,4 @@ RUN chown -R django:django /app && chmod -R 755 /app
 USER django
 
 # Run the application
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "blogs.wsgi:application"]

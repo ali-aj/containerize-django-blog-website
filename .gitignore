@@ -4,3 +4,28 @@ venv/
 __pycache__/
 db/
 .env
+
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform crash log files
+crash.log
+
+# Terraform variable files
+*.tfvars
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform provider files
+.terraform/
+.terraform.lock.hcl
+
+
+# Helm release files
+helm/release.yaml
