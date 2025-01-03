@@ -1,141 +1,81 @@
-# Django Application with Docker and Docker Compose
+# Django Blog Website
 
-This project is a containerized Django application that uses Docker for isolated environments and Docker Compose for easier multi-service orchestration. This README covers the structure, setup, and running of the application.
+Welcome to the Django Blog Website repository! This project is a fully functional blog website developed using the Django framework. It allows users to create, read, and delete blog posts. Whether you're looking to showcase your writing skills or create a platform for sharing your thoughts, this project provides a solid foundation to get you started.
 
-## Project Structure
+## Features
 
-- `Dockerfile`: Defines the Docker image for the Django application.
-- `docker-compose.yml`: Defines the Docker Compose services for the application, including the Django app and other potential services.
-- `db.sqlite3`: SQLite database file for data persistence.
-- `db/`: Directory containing the SQLite database, ensuring data persistence even if the container restarts.
+- User Authentication: Users can register, log in, and manage their own blog posts.
+- Forget Password System (OTP): Forgot your password? No worries! OTP system guarantees a seamless and secure password recovery process.
+- Blog Post Management: Create, delete, and publish blog posts with a user-friendly interface.
+- Responsive Design: The website is designed to work seamlessly across various devices and screen sizes.
+- User Profiles: Each user has a profile page showcasing their published blog posts.
+- Admin Panel: Admins can manage users, and posts through the Django admin panel.
+- Stay Connected: The "Contact Us" system ensures you're just a click away from reaching out, providing a direct line of communication.
 
-## Prerequisites
+## Installation
 
-- **Docker**: Ensure Docker is installed and running.
-- **Docker Compose**: Ensure Docker Compose is installed.
+1. Clone the repository to your local machine:
 
----
+   ```
+   git clone https://github.com/ali-aj/containerize-django-blog-website.git
+   ```
 
-## Dockerfile
+2. Create a virtual environment and activate it:
 
-The `Dockerfile` is a multi-stage build that sets up a production-ready Django application. 
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-### Structure
+3. Install Required dependencies:
 
-1. **Base Image**: Starts from `python:3.12-slim` to minimize the image size.
-2. **Dependencies**: Installs all dependencies listed in `requirements.txt`.
-3. **App Setup**: Copies application code into the container.
-4. **Non-Root User**: Creates a non-root user for added security.
-5. **CMD**: The container runs Django’s development server.
+   ```
+   pip install -r requirements.txt
+   ```
 
-### Key Commands
+4. Navigate to app directory:
+   ```
+   cd blogs/
+   ```
 
-```dockerfile
-# Use an official Python runtime as the base image
-FROM python:3.12-slim as build
+4. Set up the database:
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+   ```
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 
-# Set the working directory
-WORKDIR /app
+5. Create a superuser account to access the admin panel (Optional):
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+   ```
+   python manage.py createsuperuser
+   ```
 
-# Copy project files
-COPY . .
+6. Start the development server:
 
-# Create a non-root user
-RUN addgroup --system django && adduser --system --group django
+   ```
+   python manage.py runserver
+   ```
 
-# Run as the non-root user
-USER django
+7. Access the website in your browser at `http://127.0.0.1:8000/` and the admin panel at `http://127.0.0.1:8000/admin/`.
 
-# Start the Django server
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
-```
+## Usage
 
-### Building and Running the Docker Image
+- Visit the home page to view the list of published blog posts.
+- Register or log in to manage your own blog posts.
+- Admins can log in to the admin panel to manage various aspects of the website.
+- Visit the My Blogs page to view your blogs or delete your blogs.
 
-To build the Docker image:
+## Contributing
 
-```bash
-docker build -t django-local .
-```
+Contributions are welcome and encouraged! If you have any improvements or bug fixes to propose, please follow these steps:
 
-To run the Docker container:
+1. Fork the repository and create a new branch.
+2. Make your changes and test them thoroughly.
+3. Create a pull request with a clear description of your changes.
 
-```bash
-docker run -p 8000:8000 django-local
-```
+## Credits
 
----
+This project was developed by Muhammad Ali Mustafa and is inspired by the Django web framework. Feel free to modify, distribute, and use this project as you see fit.
 
-## Docker Compose
-
-The `docker-compose.yml` file orchestrates the Django application with other services.
-
-### Structure
-
-- **django-app**: Defines the Django application using the `Dockerfile` and binds it to port 8000.
-- **volumes**: Maps the local `db/` directory to ensure SQLite data persists between container restarts.
-
-### Key Commands
-
-```yaml
-version: '3.8'
-
-services:
-  django-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./db:/app/db
-    environment:
-      - DEBUG=1
-```
-
-### Running with Docker Compose
-
-Start the application:
-
-```bash
-docker-compose up
-```
-
-Stop the application:
-
-```bash
-docker-compose down
-```
-
----
-
-## Accessing the Application
-
-- Once started, the application is available at `http://localhost:8000`.
-- Uploaded files and data are saved in the `db/` directory for persistence.
-
----
-
-## Additional Notes
-
-- **Database Management**: SQLite is used for development. For production, consider switching to PostgreSQL or MySQL.
-- **Security**: This setup is configured for development; always set `DEBUG=0` and add secure settings for production.
-  
---- 
-
-## Troubleshooting
-
-- **Port Conflicts**: If port 8000 is in use, change it in the `docker-compose.yml` file.
-- **Database Not Found**: Ensure the `db/` directory and `db.sqlite3` file have the correct permissions for persistence.
-
---- 
-
-This setup provides a simple and efficient way to develop and test a Django application in an isolated environment. Happy coding!
+Thank you for checking out the Django Blog Website project! If you have any questions, issues, or suggestions, please don't hesitate to get in touch. 
